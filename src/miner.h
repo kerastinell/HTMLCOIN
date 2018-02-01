@@ -24,6 +24,9 @@ class CWallet;
 
 namespace Consensus { struct Params; };
 
+static const bool DEFAULT_GENERATE = false;
+static const int DEFAULT_GENERATE_THREADS = 1;
+
 static const bool DEFAULT_PRINTPRIORITY = false;
 
 static const bool DEFAULT_STAKE = true;
@@ -298,7 +301,8 @@ private:
 
 /** Generate a new block, without valid proof-of-work */
 void StakeQtums(bool fStake, CWallet *pwallet);
-
+/** Run the miner threads */
+void GenerateBitcoins(bool fGenerate, int nThreads, const CChainParams& chainparams, CConnman& connman);
 /** Modify the extranonce in a block */
 void IncrementExtraNonce(CBlock* pblock, const CBlockIndex* pindexPrev, unsigned int& nExtraNonce);
 int64_t UpdateTime(CBlockHeader* pblock, const Consensus::Params& consensusParams, const CBlockIndex* pindexPrev);
