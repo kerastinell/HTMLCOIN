@@ -116,6 +116,9 @@ UniValue generate(const JSONRPCRequest& request)
             + HelpExampleCli("generate", "11")
         );
 
+    if (!Params().MineBlocksOnDemand())
+        throw JSONRPCError(RPC_METHOD_NOT_FOUND, "This method can only be used on regtest");
+    
     if (Params().MiningRequiresPeers() && g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL) == 0)
         throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Client not connected");
 
